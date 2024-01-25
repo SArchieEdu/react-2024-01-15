@@ -3,18 +3,22 @@ import { Button } from "../button/component";
 
 import styles from "./styles.module.scss";
 
-export const Header = ({ isHighlighted }) => {
+export const Header = () => {
   return (
-    <header
-      className={classNames(styles.root, styles.header, {
-        [styles.highlighted]: isHighlighted,
-      })}
-    >
+    <header className={classNames(styles.root, styles.header)}>
       Header
-      <Button onClick={() => console.log("Open menu page")}>
+      <Button
+        className={styles.pageLink}
+        onClick={() => console.log("Open menu page")}
+      >
         <span>Menu</span>
       </Button>
-      <Button onClick={() => console.log("Open signIn page")}>SignIn</Button>
+      <Button
+        className={styles.pageLink}
+        onClick={() => console.log("Open signIn page")}
+      >
+        SignIn
+      </Button>
     </header>
   );
 };
