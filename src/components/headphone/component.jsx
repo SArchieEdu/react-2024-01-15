@@ -3,9 +3,29 @@ import { Button } from "../button/component";
 
 import styles from "./styles.module.scss";
 import { ReviewForm } from "../review-form/component";
+import { useEffect } from "react";
 
 export const Headphone = ({ headphone }) => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState({ a: "" });
+
+  useEffect(() => {
+    const callback = () => {
+      console.log("scroll");
+      // setCount((prevCount) => {
+      //   const newCount = prevCount + 1;
+      //   console.log(newCount);
+      //   return newCount;
+      // });
+    };
+
+    console.log("Hello");
+    document.addEventListener("scroll", callback);
+
+    return () => {
+      console.log("Bye");
+      document.removeEventListener("scroll", callback);
+    };
+  }, [count]);
 
   return (
     <div className={styles.root}>
@@ -21,8 +41,15 @@ export const Headphone = ({ headphone }) => {
           >
             -
           </Button>
-          {count}
-          <Button onClick={() => setCount(count + 1)}>+</Button>
+          {/* {count} */}
+          <Button
+            onClick={() => {
+              // setCount(count + 1);
+              setCount({ ...count });
+            }}
+          >
+            +
+          </Button>
         </div>
       </div>
       <ReviewForm />
