@@ -1,24 +1,21 @@
 /* eslint-disable react/jsx-key */
+
+import { Layout } from "./components/layout/component";
+import { Provider } from "react-redux";
+import { store } from "./redux";
+import { Tabs } from "./components/tabs/component";
 import { useState } from "react";
 import { Headphone } from "./components/headphone/component";
-import { Layout } from "./components/layout/component";
-import { mocks } from "./constants/mock";
-import { Button } from "./components/button/component";
-import { ThemeContext } from "./contexts/theme";
 
 export const App = () => {
-  const [theme, setTheme] = useState("default");
+  const [currentHeadphoneId, setCurrentHeadphoneId] = useState();
 
   return (
-    <ThemeContext.Provider value={theme}>
+    <Provider store={store}>
       <Layout>
-        <Button
-          onClick={() => setTheme(theme === "default" ? "dark" : "default")}
-        >
-          SwitchTheme
-        </Button>
-        <Headphone headphone={mocks[0]} />
+        <Tabs onSelect={setCurrentHeadphoneId} />
+        {currentHeadphoneId && <Headphone headphoneId={currentHeadphoneId} />}
       </Layout>
-    </ThemeContext.Provider>
+    </Provider>
   );
 };

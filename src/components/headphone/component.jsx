@@ -4,8 +4,13 @@ import { Button } from "../button/component";
 import styles from "./styles.module.scss";
 import { ReviewForm } from "../review-form/component";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectHeadphoneById } from "../../redux/entities/headphone/selectors";
 
-export const Headphone = ({ headphone }) => {
+export const Headphone = ({ headphoneId }) => {
+  const headphone = useSelector((state) =>
+    selectHeadphoneById(state, headphoneId)
+  );
   const [count, setCount] = useState({ a: "" });
 
   useEffect(() => {
