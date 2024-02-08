@@ -6,58 +6,42 @@ import { ReviewForm } from "../review-form/component";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectHeadphoneById } from "../../redux/entities/headphone/selectors";
+import {
+  decrement,
+  increment,
+  selectProductAmountById,
+} from "../../redux/ui/cart";
+import { useDispatch } from "react-redux";
 
 export const Headphone = ({ headphoneId }) => {
-  const headphone = useSelector((state) =>
-    selectHeadphoneById(state, headphoneId)
+  const headphone = useSelector(selectHeadphoneById(headphoneId));
+  const amount = useSelector((state) =>
+    selectProductAmountById(state, headphoneId)
   );
-  const [count, setCount] = useState({ a: "" });
-
-  useEffect(() => {
-    const callback = () => {
-      console.log("scroll");
-      // setCount((prevCount) => {
-      //   const newCount = prevCount + 1;
-      //   console.log(newCount);
-      //   return newCount;
-      // });
-    };
-
-    console.log("Hello");
-    document.addEventListener("scroll", callback);
-
-    return () => {
-      console.log("Bye");
-      document.removeEventListener("scroll", callback);
-    };
-  }, [count]);
+  const dispatch = useDispatch();
 
   return (
     <div className={styles.root}>
       <div className={styles.info}>
-        <h3>{headphone.name}</h3>
-        <div>
+        <h3 className={styles.title}>{headphone.name}</h3>
+        <div className={styles.actions}>
           <Button
             onClick={() => {
-              if (count > 0) {
-                setCount(count - 1);
-              }
+              dispatch(decrement(headphoneId));
             }}
           >
             -
           </Button>
-          {/* {count} */}
+          {amount}
           <Button
             onClick={() => {
-              // setCount(count + 1);
-              setCount({ ...count });
+              dispatch(increment(headphoneId));
             }}
           >
             +
           </Button>
         </div>
       </div>
-      <ReviewForm />
     </div>
   );
 };

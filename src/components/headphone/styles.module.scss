@@ -1,5 +1,13 @@
 .info {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+}
+
+.title {
+  margin-right: 10px;
+}
+
+.actions {
+  margin-left: auto;
+  min-width: 61px;
 }

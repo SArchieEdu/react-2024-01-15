@@ -4,6 +4,7 @@ import { ButtonViewVariant } from "./contants";
 import styles from "./styles.module.scss";
 import classNames from "classnames";
 import { ThemeContext } from "../../contexts/theme";
+import { forwardRef } from "react";
 
 const SizeClass = {
   [Size.s]: styles.s,
@@ -11,17 +12,21 @@ const SizeClass = {
   [Size.l]: styles.l,
 };
 
-export const Button = ({
-  onClick,
-  children,
-  className,
-  size = Size.m,
-  viewVariant = ButtonViewVariant.primary,
-}) => {
+export const Button = forwardRef(function Button(
+  {
+    onClick,
+    children,
+    className,
+    size = Size.m,
+    viewVariant = ButtonViewVariant.primary,
+  },
+  ref
+) {
   const theme = useContext(ThemeContext);
   console.log(theme);
   return (
     <button
+      ref={ref}
       className={classNames(
         styles.root,
         className,
@@ -33,4 +38,4 @@ export const Button = ({
       {children}
     </button>
   );
-};
+});

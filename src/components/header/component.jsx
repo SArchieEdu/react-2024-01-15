@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { Button } from "../button/component";
 
 import styles from "./styles.module.scss";
+import { CartButtonContainer } from "../cart-button/container";
 
 export const Header = () => {
   return (
@@ -19,6 +20,7 @@ export const Header = () => {
       >
         SignIn
       </Button>
+      <CartButtonContainer />
     </header>
   );
 };
