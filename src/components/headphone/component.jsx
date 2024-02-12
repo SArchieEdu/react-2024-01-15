@@ -12,6 +12,7 @@ import {
   selectProductAmountById,
 } from "../../redux/ui/cart";
 import { useDispatch } from "react-redux";
+import { Counter } from "../counter/component";
 
 export const Headphone = ({ headphoneId }) => {
   const headphone = useSelector(selectHeadphoneById(headphoneId));
@@ -25,21 +26,15 @@ export const Headphone = ({ headphoneId }) => {
       <div className={styles.info}>
         <h3 className={styles.title}>{headphone.name}</h3>
         <div className={styles.actions}>
-          <Button
-            onClick={() => {
+          <Counter
+            decrement={() => {
               dispatch(decrement(headphoneId));
             }}
-          >
-            -
-          </Button>
-          {amount}
-          <Button
-            onClick={() => {
+            increment={() => {
               dispatch(increment(headphoneId));
             }}
-          >
-            +
-          </Button>
+            value={amount}
+          />
         </div>
       </div>
     </div>
