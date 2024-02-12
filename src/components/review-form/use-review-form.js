@@ -39,15 +39,9 @@ export const useReviewForm = (initialValue = INITIAL_VALUE) => {
     []
   );
 
-  const name = form.name;
-  const setText = useCallback(
-    (event) => {
-      if (name) {
-        dispatch({ type: "setText", payload: event.target.value });
-      }
-    },
-    [name]
-  );
+  const setText = useCallback((event) => {
+    dispatch({ type: "setText", payload: event.target.value });
+  }, []);
 
   const setRating = useCallback(
     (event) => dispatch({ type: "setRating", payload: event.target.value }),

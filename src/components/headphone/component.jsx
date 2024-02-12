@@ -13,9 +13,17 @@ import {
 } from "../../redux/ui/cart";
 import { useDispatch } from "react-redux";
 import { Counter } from "../counter/component";
+import { useGetHeadphonesQuery } from "../../redux/services/api";
+import { Reviews } from "../reviews/component";
 
 export const Headphone = ({ headphoneId }) => {
-  const headphone = useSelector(selectHeadphoneById(headphoneId));
+  const { data: headphone } = useGetHeadphonesQuery(undefined, {
+    selectFromResult: (result) => ({
+      ...result,
+      data: result.data.find(({ id }) => headphoneId === id),
+    }),
+  });
+
   const amount = useSelector((state) =>
     selectProductAmountById(state, headphoneId)
   );
@@ -37,6 +45,7 @@ export const Headphone = ({ headphoneId }) => {
           />
         </div>
       </div>
+      <Reviews productId={headphoneId} />
     </div>
   );
 };

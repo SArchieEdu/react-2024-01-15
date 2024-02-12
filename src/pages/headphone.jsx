@@ -4,18 +4,16 @@ import { Layout } from "../components/layout/component";
 import { Tabs } from "../components/tabs/component";
 import { useState } from "react";
 
-import { getHeadphones } from "../redux/entities/headphone/thunks/get-headphones";
-import { useRequest } from "../hooks/use-request";
-import { REQUEST_STATUS } from "../redux/ui/request/constants";
+import { useGetHeadphonesQuery } from "../redux/services/api";
 
 export const HeadphonePage = () => {
   const [currentHeadphoneId, setCurrentHeadphoneId] = useState();
 
-  const requestStatus = useRequest(getHeadphones);
+  const { isLoading } = useGetHeadphonesQuery();
 
   return (
     <Layout>
-      {requestStatus === REQUEST_STATUS.pending ? (
+      {isLoading ? (
         <div>Loading...</div>
       ) : (
         <>
@@ -23,7 +21,7 @@ export const HeadphonePage = () => {
           {currentHeadphoneId && (
             <>
               <Headphone headphoneId={currentHeadphoneId} />
-              <ReviewForm />
+              <ReviewForm headphoneId={currentHeadphoneId} />
             </>
           )}
         </>

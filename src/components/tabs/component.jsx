@@ -1,15 +1,14 @@
 /* eslint-disable react/jsx-key */
-import { useSelector } from "react-redux";
-import { selectHeadphoneIds } from "../../redux/entities/headphone/selectors";
 import { Tab } from "../tab/component";
+import { useGetHeadphonesQuery } from "../../redux/services/api";
 
 export const Tabs = ({ onSelect }) => {
-  const headphoneIds = useSelector(selectHeadphoneIds);
+  const { data: headphones } = useGetHeadphonesQuery();
 
   return (
     <div>
-      {headphoneIds.map((id) => (
-        <Tab id={id} onClick={() => onSelect(id)} />
+      {headphones.map(({ id, name }) => (
+        <Tab title={name} onClick={() => onSelect(id)} />
       ))}
     </div>
   );

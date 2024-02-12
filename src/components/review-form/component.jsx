@@ -1,8 +1,12 @@
+import { useCreateReviewMutation } from "../../redux/services/api";
+import { Button } from "../button/component";
 import styles from "./styles.module.scss";
 import { useReviewForm } from "./use-review-form";
 
-export const ReviewForm = () => {
+export const ReviewForm = ({ headphoneId }) => {
   const { form, setName, setRating, setText } = useReviewForm();
+
+  const [createReview, { isLoading }] = useCreateReviewMutation();
 
   return (
     <div className={styles.root}>
@@ -25,6 +29,20 @@ export const ReviewForm = () => {
           onChange={setRating}
         />
       </div>
+      <Button
+        onClick={() =>
+          createReview({
+            headphoneId,
+            newReview: {
+              user: "hr83h29h9h9u12h9213",
+              text: form.text,
+              rating: form.rating,
+            },
+          })
+        }
+      >
+        Submit
+      </Button>
     </div>
   );
 };
