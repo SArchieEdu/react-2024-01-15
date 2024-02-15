@@ -6,7 +6,7 @@ import { CartContainer } from "../cart/container";
 import styles from "./styles.module.scss";
 import { useRef } from "react";
 
-export const CartButton = ({ amount }) => {
+export const CartButton = ({ amount, className }) => {
   const [coordinates, setCoordinates] = useState(null);
   const buttonRef = useRef();
 
@@ -16,14 +16,14 @@ export const CartButton = ({ amount }) => {
       return;
     }
 
-    const { bottom, left } = buttonRef.current.getBoundingClientRect();
+    const { bottom, right } = buttonRef.current.getBoundingClientRect();
 
-    setCoordinates({ left, top: bottom });
+    setCoordinates({ right: -right, top: bottom });
   };
 
   return (
     <>
-      <Button ref={buttonRef} onClick={toggleCartModal}>
+      <Button ref={buttonRef} onClick={toggleCartModal} className={className}>
         {amount}
       </Button>
       {coordinates &&

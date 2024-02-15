@@ -1,11 +1,31 @@
 .root {
   background-color: black;
-}
-
-.header {
-  color: white;
+  display: flex;
+  padding: 5px 20px;
 }
 
 .pageLink {
   margin-left: 10px;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  transition: opacity 0.1s;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.menuLink {
+  margin-left: 5px;
+}
+
+.logo {
+  margin-right: auto;
+}
+
+.cart {
+  margin-left: 20px;
 }

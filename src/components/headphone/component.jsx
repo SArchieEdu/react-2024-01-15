@@ -1,11 +1,5 @@
-import { useState } from "react";
-import { Button } from "../button/component";
-
 import styles from "./styles.module.scss";
-import { ReviewForm } from "../review-form/component";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectHeadphoneById } from "../../redux/entities/headphone/selectors";
 import {
   decrement,
   increment,
@@ -15,9 +9,11 @@ import { useDispatch } from "react-redux";
 import { Counter } from "../counter/component";
 import { useGetHeadphonesQuery } from "../../redux/services/api";
 import { Reviews } from "../reviews/component";
+import { useParams } from "react-router-dom";
 
-export const Headphone = ({ headphoneId }) => {
-  const { data: headphone } = useGetHeadphonesQuery(undefined, {
+export const Headphone = () => {
+  const { headphoneId } = useParams();
+  const { data: headphone, isLoading } = useGetHeadphonesQuery(undefined, {
     selectFromResult: (result) => ({
       ...result,
       data: result.data.find(({ id }) => headphoneId === id),
@@ -28,6 +24,14 @@ export const Headphone = ({ headphoneId }) => {
     selectProductAmountById(state, headphoneId)
   );
   const dispatch = useDispatch();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!headphone) {
+    return null;
+  }
 
   return (
     <div className={styles.root}>

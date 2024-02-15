@@ -19,6 +19,7 @@ export const Button = forwardRef(function Button(
     className,
     size = Size.m,
     viewVariant = ButtonViewVariant.primary,
+    disabled,
   },
   ref
 ) {
@@ -34,6 +35,7 @@ export const Button = forwardRef(function Button(
         styles[viewVariant]
       )}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>

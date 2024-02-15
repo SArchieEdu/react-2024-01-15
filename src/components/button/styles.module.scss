@@ -1,6 +1,12 @@
 .root {
   border: 1px solid grey;
   border-radius: 4px;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.7;
+  }
 }
 
 .primary {
